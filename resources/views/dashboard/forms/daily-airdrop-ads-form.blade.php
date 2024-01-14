@@ -2,8 +2,7 @@
     @csrf
 
     <div class="row px-4">
-        <input type="hidden" nam="type" value="inApp">
-    
+        <input type="hidden" nam="type" value="airDrop">
         <div class="col-md-6 col-sm-12">
             <label for="title" class="form-text">Title</label>
             <input type="text" id="title" name="title" class="form-control mb-3" placeholder="Title" required>

@@ -3,7 +3,16 @@
   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
     @if(session('logged_in'))
     <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="/logout">logout</a>
+      <a class="nav-link " aria-current="page" href="/inapp-ads">InApp Ads</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " aria-current="page" href="/airdrop-ads">AirDrop Ads</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " aria-current="page" href="/live-ads">Live Ads</a>
+    </li>
+    <li class="nav-item px-2">
+      <a class="nav-link text-white rounded-3  border bg-danger" aria-current="page" href="/logout">logout</a>
     </li>
     @endif
   </ul>

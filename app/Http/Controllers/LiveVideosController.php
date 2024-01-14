@@ -23,7 +23,7 @@ class LiveVideosController extends Controller
         $response = json_decode(Http::withToken($token)->acceptJson()
         ->post($baseUrl.'live',$body),true);    
         
-            dump($response);
+            //dump($response);
             // print_r($response);  
 
         if($response['status']){
@@ -35,4 +35,32 @@ class LiveVideosController extends Controller
         } 
         return redirect(url('dashboard'));
     }
+
+    public function get(Request $request){
+       
+        $token = session('user')['token'];
+        $baseUrl = env('API_BASE_URL');
+        // dump($baseUrl);
+        $response = json_decode(Http::withToken($token)->acceptJson()->get($baseUrl.'ads/live'),true);
+             //dump($response); 
+             
+        if($response['status']){
+            // session(['user'=>['status-message'=>$response['message']]]);
+            session()->flash('success', $response['message']);
+        } else {
+            session()->flash('error',$response['message']);
+        }
+
+        return view('live-video.all-live-video-ads',$response);
+        //return redirect(url('inapp-ads'));
+    }
+
+
+    public function delete(Request $request){
+        $baseUrl = env('API_BASE_URL');
+        // dump($baseUrl);
+        $response = json_decode(Http::delete($baseUrl.'ads/live/'),true);
+        dump($response);
+    }
+
 }

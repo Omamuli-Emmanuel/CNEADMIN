@@ -62,6 +62,35 @@ class LiveAdsController extends Controller
         } else {
             session()->flash('error',$response['message']);
         }
-        return redirect(url('dashboard'));
+        return redirect(url('live-videos'));
     }
+
+    public function get(Request $request){
+        if(session('user')['token']){
+            $token = session('user')['token'];
+        }
+        $baseUrl = env('API_BASE_URL');
+        // dump($baseUrl);
+        $response = json_decode(Http::withToken($token)->acceptJson()->get($baseUrl.'ads/live'),true);
+             //dump($response); 
+             
+        if($response['status']){
+            // session(['user'=>['status-message'=>$response['message']]]);
+            session()->flash('success', $response['message']);
+        } else {
+            session()->flash('error',$response['message']);
+        }
+
+        return view('live-video.all-live-ads',$response);
+        //return redirect(url('inapp-ads'));
+    }
+
+
+    public function delete($id=''){
+        $baseUrl = env('API_BASE_URL');
+        // dump($baseUrl);
+        $response = json_decode(Http::delete($baseUrl.'ads/live/'.$id),true);
+        dump($response);
+    }
+
 }
